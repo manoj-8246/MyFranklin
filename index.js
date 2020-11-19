@@ -6,7 +6,8 @@ const https = require('https')
 require('dotenv').config()
 
 var indexRouter = require('./routes/index');
-//var ideasRouter = require('./routes/ideas');
+var ideasRouter = require('./routes/ideas');
+var gcpTasksRouter = require('./routes/gcpTasks');
 var demoRouter = require('./routes/demo');
 
 const app = express()
@@ -16,7 +17,7 @@ const port = process.env.PORT || 8200
 //app.engine('html', engine);
 
 // view engine setup
-//app.set('view engine', 'html');
+app.set('view engine', 'pug');
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -27,9 +28,8 @@ app.get('/', (req, res) => {
 */
 
 app.use('/', indexRouter);
-
-//app.use('/ideas', ideasRouter);
-//app.use('/gcptasks', gcpTasksRouter);
+app.use('/ideas', ideasRouter);
+app.use('/gcptasks', gcpTasksRouter);
 app.use('/demo',demoRouter);
 
 app.listen(port, () => {
