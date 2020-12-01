@@ -47,6 +47,31 @@ router.post('/', function (req, res, next) {
 });
 
     
+/*** Jira NewIdea  Handler Functions ***/
+function addNewIdeaWithName(req, res, next) {
+	try {	 
+	   // Call the chat.postMessage method using the built-in WebClient
+	    const result = app.client.chat.postMessage({
+	      // The token you used to initialize your app
+	      token: process.env.TOKEN,
+	      channel: 'D01ERH0GTBQ',	  
+	      text:'Note: Idea has changed...',	  		 
+	      attachments:'[{"color": "#3AA3E3","attachment_type": "default","text":"Idea has been replaced with a slash command and is accessable by typing\n/idea","fallback": "Idea has been replaced with a slash command and is accessable by typing\n/idea"}]',
+		 
+	    });
+    
+	    //console.log(result);
+		return res.json({});
+	  }
+	  catch (error) {
+	    return res.json({
+			fulfillmentText: 'Could not get results at this time',
+			source: 'JIRA-NewIdea'
+		})
+	  }
+
+}
+
 /*** buzzword handler function ***/
 function buzzWordHandler(req, res, next) {	
 	https.get(
