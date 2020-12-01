@@ -76,12 +76,27 @@ router.post('/', function (req, res, next) {
 	   case "gchart":
                 gchartHandler(req, res, next);
                 break;	
-	  case "GenesysSalesforce":
+	    case "GenesysSalesforce":
                 genesysSalesforceHandler(req, res, next);
                 break;	
 	    case "HowFranklinWorks":
                 howFranklinWorksHandler(req, res, next);
-                break;		
+                break;	
+	   case "NetworkState":
+		networkStateHandler(req, res, next);
+		break;	
+	   case "okta":
+		oktaHandler(req, res, next);
+		break;
+	   case "roomLocation":
+		roomLocationHandler(req, res, next);
+		break;
+	  case "Sacremento":
+		sacramentoHandler(req, res, next);
+		break;	
+          case "sanmateoweather":
+		sanmateoWeatherHandler(req, res, next);
+		break;		
 		default:
                // logError("Unable to match intent. Received: " + intentName, req.body.originalDetectIntentRequest.payload.data.event.user, 'UNKNOWN', 'IDEA POST CALL');
                 res.send("Your request wasn't found and has been logged. Thank you!");
@@ -92,6 +107,112 @@ router.post('/', function (req, res, next) {
         res.send(err);
     }
 });
+
+
+/*** sanmateoWeather Handler  function ***/
+function sanmateoWeatherHandler(req, res, next){
+  
+ try{
+		const result = app.client.chat.postMessage({
+		token: process.env.TOKEN,
+		channel:process.env.ChannelId,
+		text: "*Weather in San Mateo, CA*",
+		attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"View San Mateo, CA weather."}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"View San Mateo, CA Weather"},"url":"https://weather.com/weather/today/l/USCA1005:1:US","style":"primary"}]}]}]',
+
+		});
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'sanmateoWeatherHandler'
+	})
+  } 
+	
+  }
+
+/** Sacremento Handler Function ***/
+ function sacramentoHandler(req, res, next){
+ try{
+		const result = app.client.chat.postMessage({
+		token: process.env.TOKEN,
+		channel:process.env.ChannelId,
+		text: "Escalation Plan",
+		attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"The escalation plan for IT urgent todo items."}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"View Escalation in JIRA"},"url":"https://billsdev.atlassian.net/browse/PLAN-279","style":"primary"}]}]}]',
+
+		});
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'sacramentoHandler'
+	})
+  } 
+ }
+
+
+/*** Room Location Handler function ****/
+function roomLocationHandler(req,res,next){
+  
+try{
+		const result = app.client.chat.postMessage({
+		token: process.env.TOKEN,
+		channel:process.env.ChannelId,
+		text: "Can you ask \'Alfred\' where rooms are? You will get a map to the conference room. Thank you!",
+		attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Room Search Request"}}]}]',
+		});
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'roomLocationHandler'
+	})
+  } 
+}
+
+
+/***  okta Handler function ***/
+ function oktaHandler(req,res,next){
+	 
+ try{
+		const result = app.client.chat.postMessage({
+		token: process.env.TOKEN,
+		channel:process.env.ChannelId,
+		text: "*OKTA*",
+		attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"(View link, use the right arrow to view pages.)"}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"View OKTA Data"},"url":"https://freedomfinancialnetwork.domo.com/link/IRQqVTpIo8ZvVzEl","style":"primary"}]}]}]',
+
+		});
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'oktaHandler'
+	})
+  } 
+ 
+ }
+
+
+/*** Network State Handler Function ***/
+function networkStateHandler(req,res,next){
+
+  try{
+		const result = app.client.chat.postMessage({
+		token: process.env.TOKEN,
+		channel: process.env.ChannelId,
+		text: "*CCP Network Map*",
+		attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Used to monitor basic up/down status as well as active production alarms."}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"View CCP Network Monitor"},"url":"https://prtg.freedomdebtrelief.com/public/mapshow.htm?id=19964&mapid=ccp-noc","style":"primary"}]}]}]',
+
+		});
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'networkStateHandler'
+	})
+  } 
+	
+}
+
 
 /*** how franklin works handler function ***/
 function howFranklinWorksHandler(req, res, next){
