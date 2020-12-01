@@ -14,6 +14,7 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
  var intentName = req.body.queryResult.intent.displayName;
     console.log(intentName);
+     console.log('hello!');	
     try {
         switch (intentName) {			
 	     case "BuzzWord":
