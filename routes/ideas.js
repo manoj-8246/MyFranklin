@@ -67,6 +67,21 @@ router.post('/', function (req, res, next) {
 	     case "MathFacts":
                 mathFactsHandler(req, res, next);
                 break;
+	    case "changemgt":
+                changeMgtHandler(req, res, next);
+                break;		
+	   case "gant":
+                gantHandler(req, res, next);
+                break;
+	   case "gchart":
+                gchartHandler(req, res, next);
+                break;	
+	  case "GenesysSalesforce":
+                genesysSalesforceHandler(req, res, next);
+                break;	
+	    case "HowFranklinWorks":
+                howFranklinWorksHandler(req, res, next);
+                break;		
 		default:
                // logError("Unable to match intent. Received: " + intentName, req.body.originalDetectIntentRequest.payload.data.event.user, 'UNKNOWN', 'IDEA POST CALL');
                 res.send("Your request wasn't found and has been logged. Thank you!");
@@ -78,7 +93,107 @@ router.post('/', function (req, res, next) {
     }
 });
 
+/*** how franklin works handler function ***/
+function howFranklinWorksHandler(req, res, next){
 
+    try{
+		const result = app.client.chat.postMessage({
+		token: process.env.TOKEN,
+		channel:process.env.ChannelId,
+		text: "*Franklin - (How Franklin Works) Diagram*",
+		attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Franklin is a Slack chatbot created by FFN."}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"View Dataflow Diagram"},"url":"https://www.lucidchart.com/documents/view/a6565a46-8e2e-4516-98dd-d77b1e9f47af","style":"primary"}]}]}]',
+
+		});
+			console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'howFranklinWorksHandler'
+	})
+  } 
+
+}
+
+/*** salesforce handler function ***/ 
+function genesysSalesforceHandler(req,res,next){
+      try{
+			const result = app.client.chat.postMessage({
+			token: process.env.TOKEN,
+			channel:process.env.ChannelId,
+			text: "*Genesys Salesforce Dataflow Diagram*",
+		        attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Dataflow diagram for Salesforce updates required for the \'debt settlment builder\'."}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"View Dataflow Diagram"},"url":"https://www.lucidchart.com/documents/view/8e338621-9101-4f9a-bb17-8ab61d44e73b","style":"primary"}]}]}]',
+			
+			});
+	      console.log(result);
+	    }catch (error) {
+	    return res.json({
+		fulfillmentText: 'Could not get results at this time',
+		source: 'genesysSalesforceHandler'
+		})
+	  } 
+
+}
+
+/*** gchart Handler function ***/
+function gchartHandler(req,res,next){
+
+try{
+	const result = app.client.chat.postMessage({
+			token: process.env.TOKEN,
+			channel:process.env.ChannelId,
+			text: "A Google pie diagram example.",
+		        attachments:'[{"blocks":[{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"View Pie Diagram"},"url":"https://storage.googleapis.com/ffn-images/img/gpie.html","style":"primary"}]}]}]',
+		});
+	
+	console.log(result);
+	
+ }catch (error) {
+	    return res.json({
+		fulfillmentText: 'Could not get results at this time',
+		source: 'gchart'
+		})
+	  }
+}
+
+
+/**** gant handler function ***/
+function gantHandler(req, res, next){
+	
+	try{
+	     const result = app.client.chat.postMessage({
+			token: process.env.TOKEN,
+			channel: process.env.ChannelId,
+			text: "Google Gantt Chart Example",
+		        attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"A Google gantt chart example."}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"View Gantt Chart"},"url":"https://storage.googleapis.com/ffn-images/img/ggant.html","style":"primary"}]}]}]',
+		});	    
+		console.log(result);
+	    }catch (error) {
+	    return res.json({
+		fulfillmentText: 'Could not get results at this time',
+		source: 'gant'
+		})
+	  }  
+
+}
+
+/***  Change Management Handler ***/
+function changeMgtHandler(req,res,next){     
+
+	try{
+		const result = app.client.chat.postMessage({
+		token: process.env.TOKEN,
+		channel: process.env.ChannelId,
+		text: "Change Management Diagram",
+		attachments:'[{"blocks":[{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"View Diagram"},"url":"https://www.lucidchart.com/documents/view/bb0c456b-e210-41e4-9ac0-fc93b901a9fa/0","style":"primary"}]}]}]'
+		});		
+		console.log(result);	    
+	}catch (error) {
+	    return res.json({
+		fulfillmentText: 'Could not get results at this time',
+		source: 'changemgt'
+		})
+	  }  
+}
 
 /**** speeding execuses Handler Function ***/
 function speedingExcuseHandler(req, res, next){
