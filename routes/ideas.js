@@ -109,9 +109,24 @@ router.post('/', function (req, res, next) {
 	  case "brightIdea":
 		brightIdeaHandler(req, res, next);
 		break;
-	 case "fdrSalesIntake":
+	  case "fdrSalesIntake":
 		fdrSalesIntakeHandler(req, res, next);
-		break;		
+		break;	
+	  case "todoTest":
+                todoTestHandler(req, res, next);
+                break;
+	 case "franklinStatistics":
+                franklinStatsHandler(req, res, next);
+                break;	
+	 case "managerReport":
+                managerReportHandler(req, res, next);
+                break;
+	 case "taskManager":
+                taskManagerHandler(req, res, next);
+                break;	
+	 case "actionExample":
+                actionExampleHandler(req, res, next);
+                break;		
 		default:
                // logError("Unable to match intent. Received: " + intentName, req.body.originalDetectIntentRequest.payload.data.event.user, 'UNKNOWN', 'IDEA POST CALL');
                 res.send("Your request wasn't found and has been logged. Thank you!");
@@ -123,6 +138,105 @@ router.post('/', function (req, res, next) {
     }
 });
 
+/*** ActionExample Handler Function ***/
+function  actionExampleHandler(req, res, next){
+	
+ try{
+	const result = app.client.chat.postMessage({
+	token: process.env.TOKEN,
+	channel:process.env.ChannelId,
+	text: "",
+	attachments:'[{"blocks": [{"type": "section","text": {"type": "mrkdwn","text": "You have a new request:\n*<fakeLink.toEmployeeProfile.com|Fred Enriquez - New device request>*"}},{"type": "section","fields":[{"type": "mrkdwn", "text": "*Type:*\nComputer (laptop)"},{"type": "mrkdwn","text": "*When:*\nSubmitted Aut 10"},{"type": "mrkdwn","text": "*Last Update:*\nMar 10, 2015 (3 years, 5 months)"},{"type": "mrkdwn","text": "*Reason:*\nAll vowel keys aren\'t working."},{"type": "mrkdwn","text": "*Specs:*\n\ Cheetah Pro 15 - Fast, really fast"}]},{"type": "actions","elements":[{"type": "button","text": {"type": "plain_text","emoji": true,"text": "Approve"},"style": "primary","value": "click_me_123"},{"type": "button","text": {"type": "plain_text","emoji": true,"text": "Deny"},"style": "danger","value": "click_me_123"}]}]}]',
+	});
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'actionExampleHandler'
+	})
+  }
+}
+
+
+/*** Task Manager Handler Function ***/
+function taskManagerHandler(req, res, next){
+try{
+	const result = app.client.chat.postMessage({
+	token: process.env.TOKEN,
+	channel:process.env.ChannelId,
+	text: "",
+	attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"*Daily Task Manager*\nUse to manage my daily tasks."}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"Add New Task","emoji":true},"style":"primary","value":"todo_add_new_task"},{"type":"button","text":{"type":"plain_text","text":"View Incomplete Tasks","emoji":true},"style":"primary","value":"todo_view_incompleted_tasks"},{"type":"button","text":{"type":"plain_text","text":"View Completed Tasks","emoji":true},"style":"primary","value":"todo_view_completed_tasks"},{"type":"button","text":{"type":"plain_text","text":"View Tasks Due Today","emoji":true},"style":"primary","value":"todo_tasks_due_today"},{"type":"button","text":{"type":"plain_text","text":"View Tasks Due This Week","emoji":true},"style":"primary","value":"todo_weekly_tasks"}]}]}]',
+	});
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'taskManagerHandler'
+	})
+  }
+}
+
+/*** manager Report Handler function ***/
+function managerReportHandler(req, res, next){
+ try{
+	const result = app.client.chat.postMessage({
+	token: process.env.TOKEN,
+	channel:process.env.ChannelId,
+	text: "",
+	attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"*CREATE TEAM REPORT*\nBy date range by team member"}},{"type":"section","text":{"type":"mrkdwn","text":"Pick team member from list"},"accessory":{"type":"multi_static_select","placeholder":{"type":"plain_text","text":"Select a member","emoji":true},"options":[{"text":{"type":"plain_text","text":"Glenn","emoji":true},"value":"value-0"},{"text":{"type":"plain_text","text":"Jay","emoji":true},"value":"value-1"},{"text":{"type":"plain_text","text":"Robbie","emoji":true},"value":"value-2"},{"text":{"type":"plain_text","text":"Georgina","emoji":true},"value":"value-3"}]}},{"type":"section","text":{"type":"mrkdwn","text":"Pick a start date."},"accessory":{"type":"datepicker","initial_date":"2019-10-03","placeholder":{"type":"plain_text","text":"Select a date","emoji":true}}},{"type":"section","text":{"type":"mrkdwn","text":"Pick an end date."},"accessory":{"type":"datepicker","initial_date":"2019-10-04","placeholder":{"type":"plain_text","text":"Select a date","emoji":true}}},{"type":"section","text":{"type":"mrkdwn","text":"Pick a report template."},"accessory":{"type":"static_select","placeholder":{"type":"plain_text","text":"Select a report","emoji":true},"options":[{"text":{"type":"plain_text","text":"Productivity","emoji":true},"value":"value-0"},{"text":{"type":"plain_text","text":"View closed items","emoji":true},"value":"value-1"},{"text":{"type":"plain_text","text":"View open items","emoji":true},"value":"value-2"},{"text":{"type":"plain_text","text":"Calculate Bonuses","emoji":true},"value":"value-3"},{"text":{"type":"plain_text","text":"FTE Estimate to Execute Plan","emoji":true},"value":"value-4"},{"text":{"type":"plain_text","text":"Distribute Unasigned Work (AI)","emoji":true},"value":"value-5"},{"text":{"type":"plain_text","text":"Leaderboard","emoji":true},"value":"value-6"}]}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","emoji":true,"text":"VIEW REPORT"},"style":"primary","value":"click_view_mgr_report"},{"type":"button","text":{"type":"plain_text","emoji":true,"text":"CANCEL"},"style":"danger","value":"click_do_nothing"}]}]}]',
+	});
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'managerReportHandler'
+	})
+  }
+}
+
+
+/*** franklinStatistics handler function ***/
+function franklinStatsHandler(req, res, next){
+    
+  try{
+		const result = app.client.chat.postMessage({
+		token: process.env.TOKEN,
+		channel:process.env.ChannelId,
+		text: "",
+		attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Franklin Stats ..."}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"View My Statistics"},"url": "https://storage.googleapis.com/ffn-images/img/frankstats.html","style":"primary"}]}]}]',
+	});
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'franklinStatsHandler'
+	})
+  }
+	
+	
+}
+
+
+
+/*** todo test handler function ***/
+function  todoTestHandler(req, res, next){
+
+	try{
+		const result = app.client.chat.postMessage({
+		token: process.env.TOKEN,
+		channel:process.env.ChannelId,
+		text: "",
+		attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"To add a new todo item click the button below."}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"Add New Todo"},"style":"primary","value": "clickAddTodo"}]}]}]',
+	});
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'todoTestHandler'
+	})
+  }
+
+}
 
 /*** fdrsales Intake handler function ***/
 function fdrSalesIntakeHandler(req, res, next){
