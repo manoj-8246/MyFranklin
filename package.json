@@ -15,7 +15,9 @@
     "express": "^4.17.1",
     "pug": "^3.0.0",
     "request": "^2.88.2",
-    "request-promise": "^4.2.6"
+    "request-promise": "^4.2.6",
+    "axios": "^0.21.0",
+    "@slack/bolt": "^2.4.1"
   },
   "devDependencies": {
     "axios": "^0.21.0"
