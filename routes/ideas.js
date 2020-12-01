@@ -54,7 +54,7 @@ function addNewIdeaWithName(req, res, next) {
 	    const result = app.client.chat.postMessage({
 	      // The token you used to initialize your app
 	      token: process.env.TOKEN,
-	      channel: 'D01ERH0GTBQ',	  
+	      channel: process.env.ChannelId,	  
 	      text:'Note: Idea has changed...',	  		 
 	      attachments:'[{"color": "#3AA3E3","attachment_type": "default","text":"Idea has been replaced with a slash command and is accessable by typing\n/idea","fallback": "Idea has been replaced with a slash command and is accessable by typing\n/idea"}]',
 		 
