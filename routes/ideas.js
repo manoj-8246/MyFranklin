@@ -4,13 +4,19 @@ const rp = require('request-promise');
 var router = express.Router();
 const http = require('http');
 const https = require('https');
-
+const axios = require('axios');
+const { App, LogLevel } = require("@slack/bolt");
 
 router.get('/', function (req, res, next) {    
     res.send('Successfully connected to ideas');
 });
 
-
+const app = new App({
+  token: process.env.TOKEN,
+  signingSecret: process.env.SIGNING_TOKEN,
+  // LogLevel can be imported and used to make debugging simpler
+  logLevel: LogLevel.DEBUG
+});
 
 
 router.post('/', function (req, res, next) {
