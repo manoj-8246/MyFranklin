@@ -96,6 +96,21 @@ router.post('/', function (req, res, next) {
 		break;	
           case "sanmateoweather":
 		sanmateoWeatherHandler(req, res, next);
+		break;	
+	  case "TempeWeather":
+		tempeWeatherHandler(req, res, next);
+		break;
+	  case "TwilioDomoReports":
+		twilioDomoReports(req, res, next);
+		break;	
+	  case "UnclearedPaymentsProcess":
+		unclearedPmtsProcessHandler(req, res, next);
+		break;	
+	  case "brightIdea":
+		brightIdeaHandler(req, res, next);
+		break;
+	 case "fdrSalesIntake":
+		fdrSalesIntakeHandler(req, res, next);
 		break;		
 		default:
                // logError("Unable to match intent. Received: " + intentName, req.body.originalDetectIntentRequest.payload.data.event.user, 'UNKNOWN', 'IDEA POST CALL');
@@ -108,6 +123,103 @@ router.post('/', function (req, res, next) {
     }
 });
 
+
+/*** fdrsales Intake handler function ***/
+function fdrSalesIntakeHandler(req, res, next){
+
+	try{
+		const result = app.client.chat.postMessage({
+		token: process.env.TOKEN,
+		channel:process.env.ChannelId,
+		text: "",
+		 attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"FDR Intake ..."}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"Create Request"},"url":"https://docs.google.com/forms/d/e/1FAIpQLSc4ObcOK7a5X-CeTV0MajMHcjbNpDmf1sDIfaFtZhOYqzyj7g/viewform","style":"primary"}]}]}]',	
+		});
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'fdrSalesIntakeHandler'
+	})
+  }
+
+}
+
+/***  Bright Idea Handler function ***/
+function brightIdeaHandler(req, res, next){
+
+ try{
+		const result = app.client.chat.postMessage({
+		token: process.env.TOKEN,
+		channel:process.env.ChannelId,
+		text: "",
+		 attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Brilliant Idea..."}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"Create Idea"},"url":"https://sites.google.com/freedomdebtrelief.com/ffn-bright-ideas/home","style":"primary"}]}]}]',	
+		});
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'brightIdeaHandler'
+	})
+  }
+	
+}
+
+/*** Uncleared Payment Process Handler function ***/
+function unclearedPmtsProcessHandler(req, res, next){
+	
+ try{
+		const result = app.client.chat.postMessage({
+		token: process.env.TOKEN,
+		channel:process.env.ChannelId,
+		text: "*Uncleared Payments Process Diagram*",
+		 attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Hey check out this diagram that outlines the process."}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"View Diagram"},"url":"https://www.lucidchart.com/documents/view/206ec397-36df-475e-a186-ba3abcebc5b3","style":"primary"}]}]}]',	
+		});
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'unclearedPmtsProcessHandler'
+	})
+  }
+
+}
+
+/*** Twilio Domo Report Handler Function ***/
+function twilioDomoReports(req, res, next){
+ try{
+		const result = app.client.chat.postMessage({
+		token: process.env.TOKEN,
+		channel:process.env.ChannelId,
+		text: "*Twilio SMS delivered today, by hour*",
+		attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"(View link, use the right arrow to view pages.)"}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"View Twilio Stats"},"url":"https://freedomfinancialnetwork.domo.com/link/EVJ5clmABStJHbAs","style":"primary"}]}]}]',
+			
+		});
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'tempeWeatherHandler'
+	})
+  } 
+}
+/***  tempeWeatherHandler  Handler function ***/
+function tempeWeatherHandler(req,res,next){
+	 try{
+		const result = app.client.chat.postMessage({
+		token: process.env.TOKEN,
+		channel:process.env.ChannelId,
+		text: "*Weather in Tempe, AZ*",
+		attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"View Tempe, AZ weather."}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"View Tempe, AZ Weather"},"url":"https://weather.com/weather/today/l/USAZ0233:1:US","style":"primary"}]}]}]',
+
+		});
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'tempeWeatherHandler'
+	})
+  } 
+}
 
 /*** sanmateoWeather Handler  function ***/
 function sanmateoWeatherHandler(req, res, next){
