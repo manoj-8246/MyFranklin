@@ -4,19 +4,13 @@ const rp = require('request-promise');
 var router = express.Router();
 const http = require('http');
 const https = require('https');
-const axios = require('axios');
 
-const { App, LogLevel } = require("@slack/bolt");
 
 router.get('/', function (req, res, next) {    
     res.send('Successfully connected to ideas');
 });
 
-const app = new App({
-  token: process.env.TOKEN,
-  signingSecret: process.env.SIGNING_TOKEN,  
-  logLevel: LogLevel.DEBUG
-});
+
 
 
 router.post('/', function (req, res, next) {
@@ -31,13 +25,7 @@ router.post('/', function (req, res, next) {
 	     case "BuzzWord":
                 // corporate buzz word generator
                 buzzWordHandler(req, res, next);
-                break;
-	    case "Help":                
-                helpHandler(req, res, next);
-                break;
-	    case "orderCafeteria":
-                orderCafeteriaHandler(req, res, next);
-                break;		
+                break;	   		
 	    case "MathFacts":
                 mathFactsHandler(req, res, next);
                 break;
@@ -52,29 +40,7 @@ router.post('/', function (req, res, next) {
     }
 });
 
-
-/*** Jira NewIdea  Handler Functions ***/
-function addNewIdeaWithName(req, res, next) {
-	try {	 
-	   // Call the chat.postMessage method using the built-in WebClient
-	    const result = app.client.chat.postMessage({
-	      // The token you used to initialize your app
-	      token: process.env.TOKEN,
-	      channel: 'D01ERH0GTBQ',	  
-	      text:'Note: Idea has changed...',	  		 
-	      attachments:'[{"color": "#3AA3E3","attachment_type": "default","text":"Idea has been replaced with a slash command and is accessable by typing\n/idea","fallback": "Idea has been replaced with a slash command and is accessable by typing\n/idea"}]',
-		
-	    });
-		return res.json({});
-	  }
-	  catch (error) {
-	    return res.json({
-			fulfillmentText: 'Could not get results at this time',
-			source: 'JIRA-NewIdea'
-		})
-	  }
-}
-     
+    
 /*** buzzword handler function ***/
 function buzzWordHandler(req, res, next) {	
 	https.get(
