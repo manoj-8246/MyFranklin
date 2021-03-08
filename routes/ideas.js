@@ -171,17 +171,14 @@ function buzzWordHandler(req, res, next) {
 
 				//let dataToSend ;
 				//dataToSend = `Cool Corporate Buzz Word: ${msg.phrase}`
-				//dataToSend='Hello :slightly_smiling_face:'
-				 let dataToSend = {						      
-					text: 'Hello :slightly_smiling_face:',
-					
-					};
+				dataToSend='Hello :slightly_smiling_face:'				 
 				 
 				console.log('data come here!');
 				
 				
 				return res.json({
 					fulfillmentText: dataToSend,
+					attachment:[{color: '#2c963f'}]
 					source: 'BuzzWord'
 				})
 			})
