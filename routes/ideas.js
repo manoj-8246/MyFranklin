@@ -178,7 +178,7 @@ function buzzWordHandler(req, res, next) {
 				
 				return res.json({
 					fulfillmentText: dataToSend,
-					attachment:[{color: '#2c963f'}],
+					attachments:[{color: '#2c963f'}],
 					source: 'BuzzWord'
 				})
 			})
