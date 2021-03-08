@@ -172,23 +172,9 @@ function buzzWordHandler(req, res, next) {
 				//let dataToSend ;
 				//dataToSend = `Cool Corporate Buzz Word: ${msg.phrase}`
 				//dataToSend='Hello :slightly_smiling_face:'
-				 let dataToSend = {
-					token: process.env.TOKEN,
-					channel:process.env.ChannelId,	      
+				 let dataToSend = {						      
 					text: 'Hello :slightly_smiling_face:',
-					attachments: [{
-					    text: 'What report would you like to get?',
-					    fallback: 'What report would you like to get?',
-					    color: '#2c963f',
-					    attachment_type: 'default',
-					    callback_id: 'report_selection',
-					    actions: [{
-					    name: 'reports_select_menu',
-					    text: 'Choose a report...',
-					    type: 'select',
-					    options: '',
-					    }],
-					}],
+					
 					};
 				 
 				console.log('data come here!');
