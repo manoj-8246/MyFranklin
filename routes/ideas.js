@@ -174,7 +174,7 @@ function buzzWordHandler(req, res, next) {
 				//dataToSend='Hello :slightly_smiling_face:'
 				//dataToSend='Why not join <#C024BE7LR>?'
 				
-				dataToSend='{
+				dataToSend={
 						  "slack": {
 						    "text": "",
 						    "attachments": [{
@@ -190,7 +190,7 @@ function buzzWordHandler(req, res, next) {
 						    ]
 						}]
 						  }
-						}'
+						}
 				 
 				console.log('data come here!');
 				
