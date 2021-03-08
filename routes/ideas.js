@@ -185,7 +185,8 @@ function buzzWordHandler(req, res, next) {
 				    text: 'Choose a report...',
 				    type: 'select',
 				    options: '',
-				    }]
+				    }],
+				 }],	
 				}	
 				 
 				console.log('data come here!');
