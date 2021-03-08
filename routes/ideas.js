@@ -195,7 +195,7 @@ function buzzWordHandler(req, res, next) {
 				console.log('data come here!');
 				
 				const url = 'https://slack.com/api/chat.postMessage';
-				const res = await axios.post(url, {
+				const res = axios.post(url, {
 				  channel: process.env.ChannelId,
 				  text: 'Hello, World!',
 				  username: 'Test App',
