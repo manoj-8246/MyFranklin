@@ -172,7 +172,7 @@ function buzzWordHandler(req, res, next) {
 				//let dataToSend ;
 				//dataToSend = `Cool Corporate Buzz Word: ${msg.phrase}`
 				//dataToSend='Hello :slightly_smiling_face:'
-				dataToSend='Why not join <#C024BE7LR>?'
+				//dataToSend='Why not join <#C024BE7LR>?'
 				
 				dataToSend='{
 						  "slack": {
