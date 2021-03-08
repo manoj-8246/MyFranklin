@@ -202,11 +202,12 @@ function buzzWordHandler(req, res, next) {
 				  icon_emoji: ':+1:'
 				}, { headers: { authorization: `Bearer ${process.env.TOKEN}` } });
 				
-				
-				return res.json({
+				/*
+				//return res.json({
 					fulfillmentText: dataToSend,					
 					source: 'BuzzWord'
-				})
+				}) 
+				*/
 			})
 		},
 		error => {
