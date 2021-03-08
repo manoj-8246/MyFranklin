@@ -171,10 +171,9 @@ function buzzWordHandler(req, res, next) {
 
 				let dataToSend ;
 				//dataToSend = `Cool Corporate Buzz Word: ${msg.phrase}`
-				dataToSend={
-				 text: 'Hello :slightly_smiling_face:'
-				}
-				
+				dataToSend='Hello :slightly_smiling_face:'
+				 
+				console.log('data come here!');
 				
 				
 				return res.json({
