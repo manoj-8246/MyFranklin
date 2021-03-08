@@ -174,11 +174,8 @@ function buzzWordHandler(req, res, next) {
 				//dataToSend='Hello :slightly_smiling_face:'
 				//dataToSend='Why not join <#C024BE7LR>?'
 				
-				dataToSend={
-						  "slack": {
-						    "text": "*Where should we order lunch from?* Poll by <fakeLink.toUser.com|Mark>",						    
-						  }
-						}
+				dataToSend={"text": "*Where should we order lunch from?* Poll by <fakeLink.toUser.com|Mark>"}
+						
 				 
 				console.log('data come here!');
 				
