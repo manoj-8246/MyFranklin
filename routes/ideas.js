@@ -173,13 +173,30 @@ function buzzWordHandler(req, res, next) {
 				//dataToSend = `Cool Corporate Buzz Word: ${msg.phrase}`
 				//dataToSend='Hello :slightly_smiling_face:'
 				dataToSend='Why not join <#C024BE7LR>?'
+				
+				dataToSend='{
+						  "slack": {
+						    "text": "",
+						    "attachments": [{
+						    "blocks": [
+							{
+							    "type": "section",
+							    "text": {
+								"type": "mrkdwn",
+								"text": "*Where should we order lunch from?* Poll by <fakeLink.toUser.com|Mark>"
+							    }
+							},
+
+						    ]
+						}]
+						  }
+						}'
 				 
 				console.log('data come here!');
 				
 				
 				return res.json({
-					fulfillmentText: dataToSend,
-					attachments:[{color: '#2c963f'}],
+					fulfillmentText: dataToSend,					
 					source: 'BuzzWord'
 				})
 			})
