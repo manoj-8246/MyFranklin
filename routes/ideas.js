@@ -176,38 +176,17 @@ function buzzWordHandler(req, res, next) {
 				
 				dataToSend={
 						  "slack": {
-						    "text": "",
-						    "attachments": [{
-						    "blocks": [
-							{
-							    "type": "section",
-							    "text": {
-								"type": "mrkdwn",
-								"text": "*Where should we order lunch from?* Poll by <fakeLink.toUser.com|Mark>"
-							    }
-							},
-
-						    ]
-						}]
+						    "text": "*Where should we order lunch from?* Poll by <fakeLink.toUser.com|Mark>",						    
 						  }
 						}
 				 
 				console.log('data come here!');
 				
-				const url = 'https://slack.com/api/chat.postMessage';
-				const res = axios.post(url, {
-				  channel: process.env.ChannelId,
-				  text: 'Hello, World!',
-				  username: 'Test App',
-				  icon_emoji: ':+1:'
-				}, { headers: { authorization: `Bearer ${process.env.TOKEN}` } });
-				
-				/*
-				//return res.json({
+				return res.json({
 					fulfillmentText: dataToSend,					
 					source: 'BuzzWord'
 				}) 
-				*/
+				
 			})
 		},
 		error => {
