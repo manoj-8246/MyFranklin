@@ -163,12 +163,13 @@ function buzzWordHandler(req, res, next) {
 		attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Franklin is a Slack chatbot created by FFN."}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"View Dataflow Diagram"},"url":"https://www.lucidchart.com/documents/view/a6565a46-8e2e-4516-98dd-d77b1e9f47af","style":"primary"}]}]}]',
 
 		});
-			console.log(result);
-		
+			//console.log(result);
+		/*
 		return res.json({
 					fulfillmentText: result,					
 					source: 'BuzzWord'
 				}); 
+				*/
 		
 		
     }catch (error) {
