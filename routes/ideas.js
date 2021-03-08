@@ -171,7 +171,18 @@ function buzzWordHandler(req, res, next) {
 
 				//let dataToSend ;
 				//dataToSend = `Cool Corporate Buzz Word: ${msg.phrase}`
-				dataToSend='Hello :slightly_smiling_face:'				 
+				//dataToSend='Hello :slightly_smiling_face:'
+				dataToSend={
+				"blocks": [
+					{
+						"type": "section",
+						"text": {
+							"type": "mrkdwn",
+							"text": "Why not join <#C024BE7LR|general>?"
+						}
+					}
+				]
+			}
 				 
 				console.log('data come here!');
 				
