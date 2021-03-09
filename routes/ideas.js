@@ -23,7 +23,7 @@ router.post('/', function (req, res, next) {
  var intentName = req.body.queryResult.intent.displayName;
     console.log(intentName);
      console.log('hello!');	
- var ChannelID =req.body.originalDetectIntentRequest.payload.data.event.channel; 	
+ //var ChannelID =req.body.originalDetectIntentRequest.payload.data.event.channel; 	
     try {
         switch (intentName) {	
 	     case "JIRA-NewIdea":                
@@ -156,9 +156,9 @@ router.post('/', function (req, res, next) {
 /*** buzzword handler function ***/
 function buzzWordHandler(req, res, next) {
 	
-	console.log(req.body.originalDetectIntentRequest.payload);
+	//console.log(req.body.originalDetectIntentRequest.payload);
 	console.log(req.body.originalDetectIntentRequest.payload.data.event.channel);
-	
+	let ChannelID=req.body.originalDetectIntentRequest.payload.data.event.channel;
 	try{
 		const result = app.client.chat.postMessage({
 		token: process.env.TOKEN,
