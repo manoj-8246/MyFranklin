@@ -23,6 +23,7 @@ router.post('/', function (req, res, next) {
  var intentName = req.body.queryResult.intent.displayName;
     console.log(intentName);
      console.log('hello!');	
+ var ChannelID =req.body.originalDetectIntentRequest.payload.data.event.channel; 	
     try {
         switch (intentName) {	
 	     case "JIRA-NewIdea":                
@@ -161,7 +162,7 @@ function buzzWordHandler(req, res, next) {
 	try{
 		const result = app.client.chat.postMessage({
 		token: process.env.TOKEN,
-		channel:'D01ERH0GTBQ',
+		channel:ChannelID,
 		//channel:process.env.ChannelId,
 		text: "*Franklin - (How Franklin Works) Diagram*",
 		attachments:'[{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Franklin is a Slack chatbot created by FFN."}},{"type":"actions","elements":[{"type":"button","text":{"type":"plain_text","text":"View Dataflow Diagram"},"url":"https://www.lucidchart.com/documents/view/a6565a46-8e2e-4516-98dd-d77b1e9f47af","style":"primary"}]}]}]',
