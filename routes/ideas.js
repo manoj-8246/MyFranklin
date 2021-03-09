@@ -20,10 +20,11 @@ const app = new App({
 
 
 router.post('/', function (req, res, next) {
+ const 	ChannelID=req.body.originalDetectIntentRequest.payload.data.event.channel;
  var intentName = req.body.queryResult.intent.displayName;
     console.log(intentName);
      console.log('hello!');	
- //var ChannelID =req.body.originalDetectIntentRequest.payload.data.event.channel; 	
+   	
     try {
         switch (intentName) {	
 	     case "JIRA-NewIdea":                
@@ -158,7 +159,7 @@ function buzzWordHandler(req, res, next) {
 	
 	//console.log(req.body.originalDetectIntentRequest.payload);
 	console.log(req.body.originalDetectIntentRequest.payload.data.event.channel);
-	let ChannelID=req.body.originalDetectIntentRequest.payload.data.event.channel;
+	//let ChannelID=req.body.originalDetectIntentRequest.payload.data.event.channel;
 	try{
 		const result = app.client.chat.postMessage({
 		token: process.env.TOKEN,
@@ -184,47 +185,6 @@ function buzzWordHandler(req, res, next) {
 	})
   } 
 	
-	/*
-	https.get(
-		'https://corporatebs-generator.sameerkumar.website/',
-		responseFromAPI => {
-			let completeResponse = ''
-			responseFromAPI.on('data', chunk => {
-				completeResponse += chunk
-			})
-			responseFromAPI.on('end', () => {
-				
-				console.log(completeResponse);
-				
-				//const mymath = JSON.parse(completeResponse.text);
-				
-				const msg = JSON.parse(completeResponse);
-
-				//let dataToSend ;
-				//dataToSend = `Cool Corporate Buzz Word: ${msg.phrase}`
-				//dataToSend='Hello :slightly_smiling_face:'
-				//dataToSend='Why not join <#C024BE7LR>?'
-				
-				dataToSend={"text": "*Where should we order lunch from?* Poll by <fakeLink.toUser.com|Mark>"}
-						
-				 
-				console.log('data come here!');
-				
-				return res.json({
-					fulfillmentText: dataToSend,					
-					source: 'BuzzWord'
-				}) 
-				
-			})
-		},
-		error => {
-			return res.json({
-				fulfillmentText: 'Could not get results at this time',
-				source: 'BuzzWord'
-			})
-		}
-	)
-	*/
 		
 }
    
