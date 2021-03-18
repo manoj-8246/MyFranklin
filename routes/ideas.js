@@ -1,5 +1,4 @@
 var express = require('express');
-const mysql = require('mysql');
 var bodyParser = require('body-parser')
 const rp = require('request-promise');
 var router = express.Router();
@@ -13,9 +12,7 @@ router.get('/', function (req, res, next) {
     res.send('Successfully connected to ideas');
 });
 
-console.log('database connected successfully!');
-	    console.log(mysqlPool);
-	    
+   
 	    
 
 const app = new App({
@@ -148,7 +145,10 @@ router.post('/', function (req, res, next) {
                 break;	
 	  case "CalculateGrossIncome":
                 calculateGrossIncome(req, res, next);
-                break;			
+                break;
+	case "listAllFFNDictionary":
+                listAllFFNDictionaryHandler(req, res, next);
+                break;		
 		default:
                // logError("Unable to match intent. Received: " + intentName, req.body.originalDetectIntentRequest.payload.data.event.user, 'UNKNOWN', 'IDEA POST CALL');
                 res.send("Your request wasn't found and has been logged. Thank you!");
@@ -1264,6 +1264,33 @@ function mathFactsHandler(req, res, next) {
 	)
 		
 }
+
+/**  database intent  related function section */
+function addMrkUpSlackSection(sectionText) {
+    var returnJson = {
+
+        "type": "section",
+        "text": {
+            "type": "mrkdwn",
+            "text": sectionText
+        }
+    };
+    return returnJson;
+
+}
+
+function addSlackDivider(sectionText) {
+    var returnJson = {
+        "type": "divider"
+    };
+    return returnJson;
+}
+
+/*****************This end here **************************/
+function listAllFFNDictionaryHandler(req, res, next) {
+    console.log('listAllFFNDictionaryHandler function called!');
+}
+
 
 
 module.exports = router;
