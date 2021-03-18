@@ -1316,7 +1316,8 @@ function listAllFFNDictionaryHandler(req, res, next) {
         attachments:'[{"color": "#3AA3E3","blocks":"' + Originalblocks1 + '"}]',
        })
 	    
-	console.log(result1);
+        console.log('original content');
+	console.log(Originalblocks1);
 	    
 	    
     }catch (error) {
