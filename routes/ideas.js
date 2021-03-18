@@ -1304,7 +1304,7 @@ function listAllFFNDictionaryHandler(req, res, next) {
        totalWordsFound = wordData.data.length;
        console.log('Total Words Found'+totalWordsFound);		
 		
-    }
+    });
 
     	
 	
