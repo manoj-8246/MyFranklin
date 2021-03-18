@@ -1292,11 +1292,13 @@ function listAllFFNDictionaryHandler(req, res, next) {
     var totalWordsFound = 0;
     var blocks = [];
 	
-   blocks.push(addMrkUpSlackSection("*FFN Dictionary*"));
+   //blocks.push(addMrkUpSlackSection("*FFN Dictionary*"));
 	
-	console.log(blocks);
+	//console.log(blocks);
 	
     try{
+	blocks.push(addMrkUpSlackSection("*FFN Dictionary*"));	
+	console.log(blocks);
 	const result = app.client.chat.postMessage({
 	token: process.env.TOKEN,
 	channel: req.body.originalDetectIntentRequest.payload.data.event.channel,
