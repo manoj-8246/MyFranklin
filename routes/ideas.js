@@ -1309,19 +1309,12 @@ function listAllFFNDictionaryHandler(req, res, next) {
     });
 	    
 	//var Originalblocks1=[{"type": "section","text": {"type": "mrkdwn","text": "hello"}}]; 
-	    var returnJson = {
-
-        "type": "section",
-        "text": {
-            "type": "mrkdwn",
-            "text": sectionText
-        }
-    };
+      var returnJson = {"type": "section","text": {"type": "mrkdwn","text": "hello"}};
        const result1 = ({
 	token: process.env.TOKEN,
 	channel: req.body.originalDetectIntentRequest.payload.data.event.channel,
 	text: "Required income to net a specific income.",
-        attachments:'[{"color": "#3AA3E3","blocks":"' + Originalblocks1 + '"}]',
+        attachments:'[{"color": "#3AA3E3","blocks":"' + returnJson + '"}]',
        })
 	    
         console.log('original content');
