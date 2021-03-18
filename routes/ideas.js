@@ -1298,7 +1298,16 @@ function listAllFFNDictionaryHandler(req, res, next) {
 	
     try{
 	myblocks.push(addMrkUpSlackSection("*FFN Dictionary*"));
-	myblocks.push(addSlackDivider());
+	totalWordsFound=15;
+	for (var i = 0; i < 5; i++) {
+
+                myblocks.push(addMrkUpSlackSection("*Definition: Word" + i + "*\n\n"));
+                if (totalWordsFound > 1 && i < totalWordsFound) {
+                    myblocks.push(addSlackDivider());
+                }
+	}
+    
+	//myblocks.push(addSlackDivider());
 	myblocks.push({
                     "type": "actions",
                     "elements": [{
@@ -1313,13 +1322,13 @@ function listAllFFNDictionaryHandler(req, res, next) {
                     }]
                 });
 
-	console.log(JSON.stringify(myblocks));
-	    
-	var Originalblocks=JSON.stringify(myblocks); 
 	
 	    
-	    
+	var Originalblocks=JSON.stringify(myblocks); 	    
 	console.log(Originalblocks);
+	    
+	    
+	    
 	const result = app.client.chat.postMessage({
 	token: process.env.TOKEN,
 	channel: req.body.originalDetectIntentRequest.payload.data.event.channel,
@@ -1334,39 +1343,7 @@ function listAllFFNDictionaryHandler(req, res, next) {
 	source: 'listAllFFNDictionaryHandler'
 	})
   }	
-	
-    /*	
-     blocks.push(addMrkUpSlackSection("*FFN Dictionary*"));
-     blocks.push({
-                    "type": "actions",
-                    "elements": [{
-                        "type": "button",
-                        "text": {
-                            "type": "plain_text",
-                            "emoji": true,
-                            "text": "Add New Word"
-                        },
-                        "style": "primary",
-                        "value": "add_another_word"
-                    }]
-                });
-	
-	
-                var payloadSlack = {
-                    "payload": {
-                        "slack": {
-                            "attachments": [{
-                                "blocks": blocks
-                            }]
-                        },
-                        "outputContexts": [{
-                            "name": "projects/${PROJECT_ID}/agt/sessions/${SESSION_ID}/contexts/listAllFFNDictionary"
-                        }]
-                    }
-                };
-                //console.log(payloadSlack);
-           res.send(payloadSlack);	
-	*/
+
 	
 }
 
