@@ -1290,20 +1290,20 @@ function addSlackDivider(sectionText) {
 function listAllFFNDictionaryHandler(req, res, next) {
     console.log('listAllFFNDictionaryHandler function called!');
     var totalWordsFound = 0;
-    var blocks = [];
+    var myblocks = [];
 	
    //blocks.push(addMrkUpSlackSection("*FFN Dictionary*"));
 	
 	//console.log(blocks);
 	
     try{
-	blocks.push(addMrkUpSlackSection("*FFN Dictionary*"));	
-	console.log(blocks);
+	myblocks.push(addMrkUpSlackSection("*FFN Dictionary*"));	
+	console.log(myblocks);
 	const result = app.client.chat.postMessage({
 	token: process.env.TOKEN,
 	channel: req.body.originalDetectIntentRequest.payload.data.event.channel,
 	text: "Required income to net a specific income.",
-	attachments:'[{"color": "#3AA3E3","blocks":"' + blocks + '"}]',
+	attachments:'[{"color": "#3AA3E3","blocks":"' + myblocks + '"}]',
     });
 	console.log(result);
     }catch (error) {
