@@ -1292,6 +1292,41 @@ function listAllFFNDictionaryHandler(req, res, next) {
     var totalWordsFound = 0;
     var blocks = [];
 	
+	
+     blocks.push(addMrkUpSlackSection("*FFN Dictionary*"));
+     blocks.push({
+                    "type": "actions",
+                    "elements": [{
+                        "type": "button",
+                        "text": {
+                            "type": "plain_text",
+                            "emoji": true,
+                            "text": "Add New Word"
+                        },
+                        "style": "primary",
+                        "value": "add_another_word"
+                    }]
+                });
+	
+	
+                var payloadSlack = {
+                    "payload": {
+                        "slack": {
+                            "attachments": [{
+                                "blocks": blocks
+                            }]
+                        },
+                        "outputContexts": [{
+                            "name": "projects/${PROJECT_ID}/agt/sessions/${SESSION_ID}/contexts/listAllFFNDictionary"
+                        }]
+                    }
+                };
+                //console.log(payloadSlack);
+           res.send(payloadSlack);
+
+	
+	
+	/*
     mysqlPool.query("SELECT * from `ffn_dictionary` ORDER BY word asc", (err, results) => {
       if (err) {
             console.log("Error FETCHING to ffn_dictionary db: " + err);
@@ -1304,7 +1339,8 @@ function listAllFFNDictionaryHandler(req, res, next) {
              totalWordsFound = wordData.data.length;
               console.log('Total Words Found'+totalWordsFound);		
 	}	
-    }); 	
+    }); 
+	*/
 	
 }
 
