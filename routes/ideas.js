@@ -1301,12 +1301,10 @@ function listAllFFNDictionaryHandler(req, res, next) {
                 "data": results
             };
 		
-       totalWordsFound = wordData.data.length;
-       console.log('Total Words Found'+totalWordsFound);		
+             totalWordsFound = wordData.data.length;
+              console.log('Total Words Found'+totalWordsFound);		
 	}	
-    });
-
-    	
+    }  	
 	
 }
 
