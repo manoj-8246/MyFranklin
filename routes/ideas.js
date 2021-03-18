@@ -1319,6 +1319,7 @@ function listAllFFNDictionaryHandler(req, res, next) {
 	    
         console.log('original content');
 	console.log(returnJson);
+	console.log(JSON.stringify(returnJson));    
 	    
 	    
     }catch (error) {
