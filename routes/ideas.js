@@ -1292,6 +1292,9 @@ function listAllFFNDictionaryHandler(req, res, next) {
     var totalWordsFound = 0;
     var blocks = [];
 	
+   blocks.push(addMrkUpSlackSection("*FFN Dictionary*"));
+	
+	console.log(blocks);
 	
     try{
 	const result = app.client.chat.postMessage({
