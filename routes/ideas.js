@@ -1307,7 +1307,17 @@ function listAllFFNDictionaryHandler(req, res, next) {
 	//attachments:'[{"color": "#3AA3E3","blocks":[{"type": "section","text": {"type": "mrkdwn","text": "hello"}}]}]',
 	attachments:'[{"color": "#3AA3E3","blocks":"' + Originalblocks + '"}]',
     });
-	console.log(result);
+	    
+       const result1 = ({
+	token: process.env.TOKEN,
+	channel: req.body.originalDetectIntentRequest.payload.data.event.channel,
+	text: "Required income to net a specific income.",
+        attachments:'[{"color": "#3AA3E3","blocks":"' + Originalblocks + '"}]',
+       })
+	    
+	console.log(result1);
+	    
+	    
     }catch (error) {
     return res.json({
 	fulfillmentText: 'Could not get results at this time',
