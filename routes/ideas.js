@@ -1299,15 +1299,17 @@ function listAllFFNDictionaryHandler(req, res, next) {
     try{
 	myblocks.push(addMrkUpSlackSection("*FFN Dictionary*"));	
 	console.log(myblocks);
-	 var Originalblocks=[{"type": "section","text": {"type": "mrkdwn","text": "hello"}}];
+	var Originalblocks={"type": "section","text": {"type": "mrkdwn","text": "hello"}};
 	const result = app.client.chat.postMessage({
 	token: process.env.TOKEN,
 	channel: req.body.originalDetectIntentRequest.payload.data.event.channel,
 	text: "Required income to net a specific income.",
 	//attachments:'[{"color": "#3AA3E3","blocks":[{"type": "section","text": {"type": "mrkdwn","text": "hello"}}]}]',
-	attachments:'[{"color": "#3AA3E3","blocks":"' + Originalblocks + '"}]',
+	attachments:'[{"color": "#3AA3E3","blocks":"' + JSON.stringify(Originalblocks) + '"}]',
     });
-	    
+	    console.log('result');
+	    console.log(result);
+	  /*  
 	//var Originalblocks1=[{"type": "section","text": {"type": "mrkdwn","text": "hello"}}]; 
       var returnJson = {"type": "section","text": {"type": "mrkdwn","text": "hello"}};
        const result1 = ({
@@ -1319,7 +1321,9 @@ function listAllFFNDictionaryHandler(req, res, next) {
 	    
         console.log('original content');
 	console.log(returnJson);
-	console.log(JSON.stringify(returnJson));    
+	console.log(JSON.stringify(returnJson));
+	*/
+	    
 	    
 	    
     }catch (error) {
