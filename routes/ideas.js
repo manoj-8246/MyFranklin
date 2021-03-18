@@ -1293,6 +1293,22 @@ function listAllFFNDictionaryHandler(req, res, next) {
     var blocks = [];
 	
 	
+    try{
+	const result = app.client.chat.postMessage({
+	token: process.env.TOKEN,
+	channel: req.body.originalDetectIntentRequest.payload.data.event.channel,
+	text: "Required income to net a specific income.",
+	attachments:'[{"color": "#3AA3E3","blocks":[{"type": "section","text": {"type": "mrkdwn","text": sectionText}}]}]',
+    });
+	console.log(result);
+    }catch (error) {
+    return res.json({
+	fulfillmentText: 'Could not get results at this time',
+	source: 'listAllFFNDictionaryHandler'
+	})
+  }	
+	
+    /*	
      blocks.push(addMrkUpSlackSection("*FFN Dictionary*"));
      blocks.push({
                     "type": "actions",
@@ -1322,24 +1338,7 @@ function listAllFFNDictionaryHandler(req, res, next) {
                     }
                 };
                 //console.log(payloadSlack);
-           res.send(payloadSlack);
-
-	
-	
-	/*
-    mysqlPool.query("SELECT * from `ffn_dictionary` ORDER BY word asc", (err, results) => {
-      if (err) {
-            console.log("Error FETCHING to ffn_dictionary db: " + err);
-            //res.status(500).send(err);
-        } else {
-            var wordData = {
-                "data": results
-            };
-		
-             totalWordsFound = wordData.data.length;
-              console.log('Total Words Found'+totalWordsFound);		
-	}	
-    }); 
+           res.send(payloadSlack);	
 	*/
 	
 }
