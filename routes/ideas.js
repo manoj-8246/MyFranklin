@@ -1308,11 +1308,12 @@ function listAllFFNDictionaryHandler(req, res, next) {
 	attachments:'[{"color": "#3AA3E3","blocks":"' + Originalblocks + '"}]',
     });
 	    
+	var Originalblocks1=[{"type": "section","text": {"type": "mrkdwn","text": "hello"}}];    
        const result1 = ({
 	token: process.env.TOKEN,
 	channel: req.body.originalDetectIntentRequest.payload.data.event.channel,
 	text: "Required income to net a specific income.",
-        attachments:'[{"color": "#3AA3E3","blocks":"' + Originalblocks + '"}]',
+        attachments:'[{"color": "#3AA3E3","blocks":"' + Originalblocks1 + '"}]',
        })
 	    
 	console.log(result1);
