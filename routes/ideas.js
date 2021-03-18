@@ -1308,7 +1308,15 @@ function listAllFFNDictionaryHandler(req, res, next) {
 	attachments:'[{"color": "#3AA3E3","blocks":"' + Originalblocks + '"}]',
     });
 	    
-	var Originalblocks1=[{"type": "section","text": {"type": "mrkdwn","text": "hello"}}];    
+	//var Originalblocks1=[{"type": "section","text": {"type": "mrkdwn","text": "hello"}}]; 
+	    var returnJson = {
+
+        "type": "section",
+        "text": {
+            "type": "mrkdwn",
+            "text": sectionText
+        }
+    };
        const result1 = ({
 	token: process.env.TOKEN,
 	channel: req.body.originalDetectIntentRequest.payload.data.event.channel,
@@ -1317,7 +1325,7 @@ function listAllFFNDictionaryHandler(req, res, next) {
        })
 	    
         console.log('original content');
-	console.log(JSON.parse(Originalblocks1));
+	console.log(returnJson);
 	    
 	    
     }catch (error) {
