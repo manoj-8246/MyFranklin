@@ -1289,6 +1289,25 @@ function addSlackDivider(sectionText) {
 /*****************This end here **************************/
 function listAllFFNDictionaryHandler(req, res, next) {
     console.log('listAllFFNDictionaryHandler function called!');
+    var totalWordsFound = 0;
+    var blocks = [];
+	
+    mysqlPool.query("SELECT * from `ffn_dictionary` ORDER BY word asc", (err, results) => {
+      if (err) {
+            console.log("Error FETCHING to ffn_dictionary db: " + err);
+            //res.status(500).send(err);
+        } else {
+            var wordData = {
+                "data": results
+            };
+		
+       totalWordsFound = wordData.data.length;
+       console.log('Total Words Found'+totalWordsFound);		
+		
+    }
+
+    	
+	
 }
 
 
