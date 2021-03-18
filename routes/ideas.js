@@ -1300,7 +1300,8 @@ function listAllFFNDictionaryHandler(req, res, next) {
 	myblocks.push(addMrkUpSlackSection("*FFN Dictionary*"));	
 	console.log(JSON.stringify(myblocks));
 	    
-	var Originalblocks=JSON.stringify(myblocks)
+	var Originalblocks=JSON.stringify(myblocks);
+	console.log(Originalblocks);
 	const result = app.client.chat.postMessage({
 	token: process.env.TOKEN,
 	channel: req.body.originalDetectIntentRequest.payload.data.event.channel,
