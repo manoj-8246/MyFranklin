@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
     res.send('Successfully connected to ideas');
 });
 
-console.log('database connected successfully!);
+console.log('database connected successfully!');
 	    console.log(mysqlPool);
 	    
 	    
