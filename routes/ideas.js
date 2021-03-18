@@ -1317,7 +1317,7 @@ function listAllFFNDictionaryHandler(req, res, next) {
        })
 	    
         console.log('original content');
-	console.log(Originalblocks1);
+	console.log(Parse.JSON(Originalblocks1));
 	    
 	    
     }catch (error) {
