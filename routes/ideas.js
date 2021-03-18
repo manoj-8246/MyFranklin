@@ -1299,6 +1299,20 @@ function listAllFFNDictionaryHandler(req, res, next) {
     try{
 	myblocks.push(addMrkUpSlackSection("*FFN Dictionary*"));
 	myblocks.push(addSlackDivider());
+	myblocks.push({
+                    "type": "actions",
+                    "elements": [{
+                        "type": "button",
+                        "text": {
+                            "type": "plain_text",
+                            "emoji": true,
+                            "text": "Add New Word"
+                        },
+                        "style": "primary",
+                        "value": "add_another_word"
+                    }]
+                });
+
 	console.log(JSON.stringify(myblocks));
 	    
 	var Originalblocks=JSON.stringify(myblocks); 
