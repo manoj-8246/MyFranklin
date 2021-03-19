@@ -1365,15 +1365,16 @@ function wordLookupHandler(req, res, next) {
        // mysqlPool = mysql.createPool(mysqlConfig);
     //}
 
-    //mysqlPool.query("SELECT * from `ffn_dictionary` WHERE `key_words` like '%" + wordToSearch + "%'", (err, results) => {
-        // if (err) {
-            // console.log("Error FETCHING to ffn_dictionary db: " + err);
-            // //res.status(500).send(err);
-        // } else {
-            // var wordData = {
-                // "data": results
-            // };
-
+    mysqlPool.query("SELECT * from `ffn_dictionary` WHERE `key_words` like '%" + wordToSearch + "%'", (err, results) => {
+         /*
+	    if (err) {
+             console.log("Error FETCHING to ffn_dictionary db: " + err);
+             //res.status(500).send(err);
+        } else {
+             var wordData = {
+                 "data": results
+             };
+*/
             //totalWordsFound = wordData.data.length;
 			totalWordsFound=20;
             myblocks.push(addMrkUpSlackSection("*FFN Dictionary*"));
@@ -1447,8 +1448,8 @@ function wordLookupHandler(req, res, next) {
             }
 
         }
-    //});   
-//}
+    });   
+}
 
 
 
