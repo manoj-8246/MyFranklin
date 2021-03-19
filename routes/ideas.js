@@ -148,6 +148,9 @@ router.post('/', function (req, res, next) {
                 break;
 	case "listAllFFNDictionary":
                 listAllFFNDictionaryHandler(req, res, next);
+                break;	
+	case "defineThisWord":
+                wordLookupHandler(req, res, next);
                 break;		
 		default:
                // logError("Unable to match intent. Received: " + intentName, req.body.originalDetectIntentRequest.payload.data.event.user, 'UNKNOWN', 'IDEA POST CALL');
@@ -1345,6 +1348,106 @@ function listAllFFNDictionaryHandler(req, res, next) {
   }	
 
 	
+}
+
+function wordLookupHandler(req, res, next) {
+
+    console.log('wordLookupHandler function called!');
+    //var mysqlpool;
+    var wordToSearch = '';
+    var myblocks = [];
+    var totalWordsFound = 0;
+    if (req.body.queryResult.queryText) {
+        wordToSearch = req.body.queryResult.queryText.toLowerCase().replace(/lookup: /g, "").replace(/lookup /g, "").replace(/meaning of: /g, "").replace(/meaning of /g, "").replace(/what is: /g, "").replace(/what is /g, "").replace(/define: /g, "").replace(/define /g, "").trim();
+    }
+
+   // if (!mysqlPool) {
+       // mysqlPool = mysql.createPool(mysqlConfig);
+    //}
+
+    //mysqlPool.query("SELECT * from `ffn_dictionary` WHERE `key_words` like '%" + wordToSearch + "%'", (err, results) => {
+        // if (err) {
+            // console.log("Error FETCHING to ffn_dictionary db: " + err);
+            // //res.status(500).send(err);
+        // } else {
+            // var wordData = {
+                // "data": results
+            // };
+
+            //totalWordsFound = wordData.data.length;
+			totalWordsFound=20;
+            myblocks.push(addMrkUpSlackSection("*FFN Dictionary*"));
+            for (var i = 0; i < totalWordsFound; i++) {
+
+               // myblocks.push(addMrkUpSlackSection("*Definition: " + wordData.data[i].word + "*\n\n" + wordData.data[i].definition));
+			   myblocks.push(addMrkUpSlackSection("*Definition: " + [i] + "*\n\n" + [i]));
+
+
+
+                if (totalWordsFound > 1 && i < totalWordsFound) {
+                    myblocks.push(addSlackDivider());
+                }
+
+
+            }
+
+            if (totalWordsFound > 0) {
+
+                myblocks.push({
+                    "type": "actions",
+                    "elements": [{
+                        "type": "button",
+                        "text": {
+                            "type": "plain_text",
+                            "emoji": true,
+                            "text": "Add New Word"
+                        },
+                        "style": "primary",
+                        "value": "add_another_word"
+                    }]
+                });
+
+               
+                /**** updated code  */
+
+                 try{
+                    var Originalblocks=JSON.stringify(myblocks);     
+                    const result = app.client.chat.postMessage({
+                        token: process.env.TOKEN,
+                        channel: req.body.originalDetectIntentRequest.payload.data.event.channel,
+                        text: "",                
+                        attachments:'[{"color": "#3AA3E3","blocks":' + Originalblocks + '}]',
+                    });                        
+                }catch (error) {
+                    return res.json({
+						fulfillmentText: 'Could not get results at this time',
+						source: 'wordLookupHandler'
+                    });
+				}
+
+            } else {
+
+                
+                 try{
+                       
+                    const result = app.client.chat.postMessage({
+                        token: process.env.TOKEN,
+                        channel: req.body.originalDetectIntentRequest.payload.data.event.channel,
+                        text: "",                
+                        attachments: '[{"blocks": [{"type": "section","text": {"type": "mrkdwn","text": "*FFN Dictionary*\nThe word *"' + wordToSearch + '"* was not found.\nAdd the definition by clicking the button below"}},{"type": "actions","elements": [{"type": "button","text": {"type": "plain_text","emoji": true,"text": "Add New Word"},"style": "primary","value": "add_another_word"}]}] }]',
+                    });                        
+                }catch (error) {
+                    return res.json({
+						fulfillmentText: 'Could not get results at this time',
+						source: 'wordLookupHandler'
+                    });
+				}
+
+            
+            }
+
+        }
+    //});   
 }
 
 
