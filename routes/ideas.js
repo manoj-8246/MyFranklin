@@ -1447,7 +1447,7 @@ function wordLookupHandler(req, res, next) {
             
             }
 
-        }
+        //}
     });   
 }
 
